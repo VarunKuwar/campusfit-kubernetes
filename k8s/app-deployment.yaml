@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: campusfit
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: campusfit
+
+  template:
+    metadata:
+      labels:
+        app: campusfit
+
+    spec:
+      containers:
+      - name: campusfit
+        image: varunkuwar2005/campusfit:v1
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 3000
+
+        env:
+        - name: PORT
+          value: "3000"
+
+        - name: APP_ENV
+          value: "development"
+
+        - name: MONGO_URI
+          value: mongodb://admin:password123@mongodb-service:27017/campusfit?authSource=admin
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000

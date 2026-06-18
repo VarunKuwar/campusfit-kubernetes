@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: campusfit-service
+
+spec:
+  selector:
+    app: campusfit
+
+  ports:
+  - port: 80
+    targetPort: 3000
+
+  type: LoadBalancer
+
