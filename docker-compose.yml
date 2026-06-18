@@ -14,7 +14,7 @@ services:
       - mongo-data:/data/db
 
   app:
-    image: campusfit-app
+    image: campusfit
     container_name: campusfit-container
     restart: always
     depends_on:
