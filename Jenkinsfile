@@ -53,10 +53,6 @@ pipeline {
 
                 echo 'Deploying to K8s...'
 
-                sh """
-                kubectl set image deployment/campusfit-app \
-                campusfit-app=${IMAGE_NAME}:${BUILD_TAG}
-
                 kubectl apply -f k8s/
 
                 kubectl rollout status deployment/campusfit-app
