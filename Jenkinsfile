@@ -57,7 +57,7 @@ pipeline {
 
                 kubectl apply -f k8s/
 
-                kubectl rollout status deployment/campusfit
+                kubectl rollout status deployment/campusfit123444
                 """
             }
         }
