@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: campusfit_user
+      MONGO_INITDB_ROOT_PASSWORD: campusfit_password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    image: campusfit-app
+    container_name: campusfit-container
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://campusfit_user:campusfit_password@mongodb:27017/campusfit_db?authSource=admin
+      PORT: 3000
+      APP_ENV: development
+    ports:
+      - "3000:3000"
+
+volumes:
+  mongo-data:
